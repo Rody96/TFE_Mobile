@@ -1,16 +1,35 @@
-// http is an inbuilt module in Node.js
-const http = require('http');
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
-// createServer method takes a callback function as argument
-// the callback function takes two arguments req and re
-const server = http.createServer(function (req, res) {
-    res.statusCode = 200; // 200 = OK
-    res.setHeader('Content-Type', 'text/html');
-    res.write("<h1>Demo page</h1>");
-    res.end();
+const app = express();
+
+var corsOptions = {
+  origin: "http://localhost:8081"
+};
+
+app.use(cors(corsOptions));
+
+// parse requests of content-type - application/json
+app.use(bodyParser.json());
+
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
+
+const db = require("./app/models");
+db.sequelize.sync({ force: true }).then(() => {
+    console.log("Drop and re-sync db.");
+  });
+
+// simple route
+app.get("/", (req, res) => {
+  res.json({ message: "Backend App " });
 });
 
-// server is listening to incoming requests on port 3000 on localhost
-server.listen(3000, function () {
-    console.log("Listening on port http://localhost:3000");
+require("./routes/tutorial.routes")(app);
+
+// set port, listen for requests
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
 });

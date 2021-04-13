@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/Rody96/TFE_2020-2021/issues"
   },
-  "homepage": "https://github.com/Rody96/TFE_2020-2021#readme"
+  "homepage": "https://github.com/Rody96/TFE_2020-2021#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.6.2"
+  }
 }
