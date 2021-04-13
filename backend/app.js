@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const app = express();
+require('dotenv').config();
 
 var corsOptions = {
   origin: "http://localhost:8081"
@@ -16,7 +17,7 @@ app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const db = require("./app/models");
+const db = require("./models");
 db.sequelize.sync({ force: true }).then(() => {
     console.log("Drop and re-sync db.");
   });
