@@ -1,7 +1,7 @@
 const db = require("../models");
 const Tutorial = db.tutorials;
 const Op = db.Sequelize.Op;
-
+const Mesures = db.mesures;
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
   // Validate request
@@ -140,6 +140,50 @@ exports.findAllPublished = (req, res) => {
       res.status(500).send({
         message:
           err.message || "Some error occurred while retrieving tutorials."
+      });
+    });
+};
+
+/////////////////////////// TEMPERATURES ////////////////////////////////////////////
+
+exports.createTemperature = (req, res) => {
+  // Validate request
+  if (!req.body.temperature) {
+    res.status(400).send({
+      message: "Content can not be empty!"
+    });
+    return;
+  }
+
+  // Create a Tutorial
+  const mesure = {
+    temperature: req.body.temperature,
+    published: req.body.published ? req.body.published : false
+  };
+
+  // Save Tutorial in the database
+  Mesures.create(mesure)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while creating the temperature."
+      });
+    });
+};
+
+exports.findOneTemperature = (req, res) => {
+  const id = req.params.id;
+
+  Mesures.findByPk(id)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error retrieving Temperature with id=" + id
       });
     });
 };

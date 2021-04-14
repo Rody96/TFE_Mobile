@@ -28,6 +28,7 @@ app.get("/", (req, res) => {
 });
 
 require("./routes/tutorial.routes")(app);
+require("./routes/mesure.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
