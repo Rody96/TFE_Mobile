@@ -1,10 +1,10 @@
 module.exports = {
-  HOST: "localhost",
-  USER: "root",
-  PASSWORD: process.env.PASSWORD,
-  PORT:3306,
-  DB: "test",
-  dialect: "mariadb",
+  host: "localhost",
+  port: 3306,
+  username: "root",
+  password: process.env.PASSWORD,
+  dialect: 'mariadb',
+  database: process.env.DATABASE,
   pool: {
     max: 5,
     min: 0,
