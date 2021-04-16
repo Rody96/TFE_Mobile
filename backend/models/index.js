@@ -12,7 +12,8 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.mesures = require("./mesures.model")(sequelize,Sequelize);
+db.temperature = require("./temperature.model")(sequelize,Sequelize);
+db.airQuality = require("./airQuality.model")(sequelize,Sequelize);
 db.users = require("./users.model")(sequelize, Sequelize);
 
 module.exports = db;

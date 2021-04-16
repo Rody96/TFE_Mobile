@@ -1,7 +1,9 @@
 const db = require("../models");
 const Tutorial = db.tutorials;
 const Op = db.Sequelize.Op;
-const Mesures = db.mesures;
+const Temperature = db.temperature;
+const AirQuality = db.airQuality;
+/*
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
   // Validate request
@@ -143,10 +145,10 @@ exports.findAllPublished = (req, res) => {
       });
     });
 };
-
+*/
 /////////////////////////// TEMPERATURES ////////////////////////////////////////////
 
-exports.createTemperature = (req, res) => {
+exports.addTemperatureMeasure = (req, res) => {
   // Validate request
   if (!req.body.temperature) {
     res.status(400).send({
@@ -155,14 +157,15 @@ exports.createTemperature = (req, res) => {
     return;
   }
 
-  // Create a Tutorial
-  const mesure = {
+  // Create a Temperature
+  const temperature = {
     temperature: req.body.temperature,
+    userId: req.body.userId,
     published: req.body.published ? req.body.published : false
   };
 
   // Save Tutorial in the database
-  Mesures.create(mesure)
+  Temperature.create(temperature)
     .then(data => {
       res.send(data);
     })
@@ -174,10 +177,54 @@ exports.createTemperature = (req, res) => {
     });
 };
 
-exports.findOneTemperature = (req, res) => {
+exports.findOneTemperatureMeasure = (req, res) => {
   const id = req.params.id;
 
-  Mesures.findByPk(id)
+  Temperature.findByPk(id)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error retrieving Temperature with id=" + id
+      });
+    });
+};
+
+/////////////////////////// AIR QUALITY ////////////////////////////////////////////
+exports.addAirQualityMeasure = (req, res) => {
+  // Validate request
+  if (!req.body.ppm) {
+    res.status(400).send({
+      message: "Content can not be empty!"
+    });
+    return;
+  }
+
+  // Create a Temperature
+  const airQualityMeasure = {
+    ppm: req.body.ppm,
+    userId: req.body.userId,
+    published: req.body.published ? req.body.published : false
+  };
+
+  // Save Tutorial in the database
+  AirQuality.create(airQualityMeasure)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while creating the temperature."
+      });
+    });
+};
+
+exports.findOneAirQualityMeasure = (req, res) => {
+  const id = req.params.id;
+
+  AirQuality.findByPk(id)
     .then(data => {
       res.send(data);
     })

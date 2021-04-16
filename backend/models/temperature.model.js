@@ -1,7 +1,7 @@
 
 module.exports = (sequelize, Sequelize) => {
   const Users = require("./users.model")(sequelize, Sequelize);
-  const Mesures = sequelize.define("mesures", {
+  const Temperature = sequelize.define("temperature", {
     id: {
       type: Sequelize.INTEGER,
       allowNull: false,
@@ -10,14 +10,6 @@ module.exports = (sequelize, Sequelize) => {
     },
     temperature: {
       type: Sequelize.FLOAT,
-      allowNull:false
-    },
-    ppm: {
-      type: Sequelize.INTEGER,
-      allowNull:false
-    },
-    humidity: {
-      type: Sequelize.INTEGER,
       allowNull:false
     },
     userId:{
@@ -30,5 +22,5 @@ module.exports = (sequelize, Sequelize) => {
   }
   });
 
-  return Mesures;
+  return Temperature;
 };
