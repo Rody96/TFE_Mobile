@@ -1,26 +1,31 @@
 
-module.exports = (sequelize, Sequelize) => {
-  const Users = require("./users.model")(sequelize, Sequelize);
-  const Temperature = sequelize.define("temperature", {
+const seq = require("../config/sequelize.config");
+const Sequelize = seq.Sequelize, Model = seq.Model, sequelize = seq.sequelize, DataTypes = seq.DataTypes;
+const Users = require("./users.model");
+class Temperature extends Model {}
+
+  Temperature.init({
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
     temperature: {
-      type: Sequelize.FLOAT,
+      type: DataTypes.FLOAT,
       allowNull:false
     },
     userId:{
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: Users,
         key: 'id'
     }
   }
+  },{
+      sequelize,
+      modelName: 'Temperature'
   });
 
-  return Temperature;
-};
+  module.exports = Temperature;

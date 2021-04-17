@@ -1,29 +1,34 @@
+  
+const seq = require("../config/sequelize.config");
+const Sequelize = seq.Sequelize, Model = seq.Model, sequelize = seq.sequelize, DataTypes = seq.DataTypes;
+class Users extends Model {}
 
-module.exports = (sequelize, Sequelize) => {
-  const Users = sequelize.define("users", {
+    Users.init({
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
   },
   mail: {
-      type: Sequelize.TEXT,
+      type: DataTypes.TEXT,
       allowNull: false
   },
   password: {
-      type: Sequelize.TEXT,
+      type: DataTypes.TEXT,
       allowNull: false
   },
   firstName: {
-      type: Sequelize.TEXT,
+      type: DataTypes.TEXT,
       allowNull: false
   },
   lastName: {
-      type: Sequelize.TEXT,
+      type: DataTypes.TEXT,
       allowNull: false,
-  },
+  }
+},{
+    sequelize,
+    modelName: 'Users',
   });
 
-  return Users;
-};
+  module.exports = Users;
