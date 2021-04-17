@@ -1,11 +1,10 @@
-module.exports = app => {
-const mesures = require("../controller/mesures.controller");
-var router = require("express").Router();
+const express = require('express');
+const router = express.Router();
+const controllerTemperature = require("../controllers/temperature.controller");
 
   //Create new temperature
-  router.post('/add', mesures.addTemperatureMeasure);
+  router.post('/add', controllerTemperature.addTemperatureMeasure);
   //Search one temperature
-  router.get("/:id", mesures.findOneTemperatureMeasure);
+  router.get("/:id", controllerTemperature.findOneTemperatureMeasure);
 
-  app.use('/api/temperature', router);
-}
+  module.exports = router;

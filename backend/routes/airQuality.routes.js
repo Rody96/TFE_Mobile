@@ -1,11 +1,10 @@
-module.exports = app => {
-  const mesures = require("../controller/mesures.controller");
-  var router = require("express").Router();
-  
+const express = require('express');
+const router = express.Router();
+const controllerAirQuality = require("../controllers/airQuality.controller");
+
     //Create new temperature
-    router.post('/add', mesures.addAirQualityMeasure);
+    router.post('/add', controllerAirQuality.addAirQualityMeasure);
     //Search one temperature
-    router.get("/:id", mesures.findOneAirQualityMeasure);
+    router.get("/:id", controllerAirQuality.findOneAirQualityMeasure);
   
-    app.use('/api/airquality', router);
-  }
+    module.exports = router;
