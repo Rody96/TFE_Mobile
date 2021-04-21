@@ -1,7 +1,6 @@
 const Temperature = require("../models/temperature.model");
 
 exports.addTemperatureMeasure = (req, res) => {
-  // Validate request
   if (!req.body.temperature) {
     res.status(400).send({
       message: "Content can not be empty!"
@@ -9,22 +8,20 @@ exports.addTemperatureMeasure = (req, res) => {
     return;
   }
 
-  // Create a Temperature
-  const temperature = {
+  const temperatureMeasure = {
     temperature: req.body.temperature,
     userId: req.body.userId,
     published: req.body.published ? req.body.published : false
   };
 
-  // Save Tutorial in the database
-  Temperature.create(temperature)
+  Temperature.create(temperatureMeasure)
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the temperature."
+          err.message || "Some error occurred while creating the temperature measure."
       });
     });
 };
@@ -38,7 +35,7 @@ exports.findOneTemperatureMeasure = (req, res) => {
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error retrieving Temperature with id=" + id
+        message: "Error retrieving temperature measure with id=" + id
       });
     });
 };

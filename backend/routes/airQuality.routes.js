@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const controllerAirQuality = require("../controllers/airQuality.controller");
 
-    //Create new temperature
+    //Add new air quality measure
     router.post('/add', controllerAirQuality.addAirQualityMeasure);
-    //Search one temperature
+    //Search one air quality measure
     router.get("/:id", controllerAirQuality.findOneAirQualityMeasure);
   
     module.exports = router;
