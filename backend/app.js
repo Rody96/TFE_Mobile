@@ -40,10 +40,12 @@ seq.sequelize.sync()
 /////////////////// ROUTES /////////////////////
 const temperatureRoute =  require("./routes/temperature.routes")
 const airQualityRoute = require("./routes/airQuality.routes")
+const humidityRoute = require("./routes/humidity.routes");
 const usersRoute = require("./routes/users.routes")
 
 app.use("/temperature", temperatureRoute);
 app.use("/airquality", airQualityRoute);
+app.use("/humidity", humidityRoute);
 app.use("/users", usersRoute);
 ////////////////////////////////////////////////
 
