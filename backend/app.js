@@ -3,7 +3,6 @@ const app = express();
 
 require('dotenv').config();
 const session = require('express-session');
-require('dotenv').config();
 
 /////////////// CORS /////////////////
 const cors = require("cors");
