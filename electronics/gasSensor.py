@@ -1,22 +1,35 @@
-try:
-  from pyfirmata import Arduino, util
-except:
-  import pip
-  pip.main(["install",'pyfirmata'])
-  from pyfirmata import Arduino, util  
+import serial
 import time
+import schedule
 import requests
 
+def main_func():
+    arduino = serial.Serial('com3', 9600)
+    print('Established serial connection to Arduino')
+    arduino_data = arduino.readline()
 
-board = Arduino('COM3')
+    decoded_values = str(arduino_data[0:len(arduino_data)].decode("utf-8"))
+    gasMeasurement = decoded_values
 
-iterator = util.Iterator(board)
-iterator.start()
+    print(gasMeasurement)
+    r = requests.post("http://localhost:8080/airquality/add", data = {'ppm': gasMeasurement, 'userId':1})
+    print(r.text)
 
-gasSensor = board.get_pin('a:5:i')
+
+    arduino_data = 0
+    gasMeasurement = ""
+    arduino.close()
+    print('Connection closed')
+    print('<----------------------------->')
+
+
+# ----------------------------------------Main Code------------------------------------
+gasMeasurement = ""
+
+print('Program started')
+
+schedule.every(3).seconds.do(main_func)
+
 while True:
-  time.sleep(2)
-  result = int(gasSensor.read() * 1000)
-  r = requests.post("http://localhost:8080/api/airquality/add", data = {'ppm':result, 'userId':1})
-  print(r.text)
-  print(result)
+    schedule.run_pending()
+    time.sleep(1)
