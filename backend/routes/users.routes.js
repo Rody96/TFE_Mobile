@@ -9,8 +9,8 @@ router.get('/takenEmail', controllerUsers.takenEmail);
 router.get('/errorConnection', controllerUsers.errorConnection);
 router.get('/notConnected', controllerUsers.notConnected);
 router.get('/logout',isLoggedIn, controllerUsers.logout);
-router.get('/getLearningMode',(req,res) => controllerUsers.getLearningMode(req,res));
-router.patch('/updateLearningMode', (req,res) => controllerUsers.updateLearningMode(req, res));
+router.get('/getFanState',(req,res) => controllerUsers.getFanState(req,res));
+router.patch('/updateFanState',  (req,res) => controllerUsers.updateFanState(req,res));
 router.post('/signup', passport.authenticate('local-signup', {
     successRedirect: '/users/successCreation',
     failureRedirect: '/users/takenEmail'

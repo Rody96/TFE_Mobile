@@ -25,6 +25,11 @@ class Users extends Model {}
   lastName: {
       type: DataTypes.TEXT,
       allowNull: false,
+  },
+  fanState: {
+    type: DataTypes.BOOLEAN,
+    allowNull: true,
+    defaultValue: false
   }
 },{
     sequelize,
