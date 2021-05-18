@@ -15,11 +15,13 @@ export default class ButtonBasics extends React.Component {
       if(this.state.led == false){
         this.state.led = true;
         postOnOfftoApi(this.state.led,1);
+        console.log(this.state.led)
         Alert.alert('On')  
       }
       else if(this.state.led == true){
-        this.state.led == false;
+        this.state.led = false;
         postOnOfftoApi(this.state.led,1);
+        console.log(this.state.led)
         Alert.alert('Off') 
       }
     }  
