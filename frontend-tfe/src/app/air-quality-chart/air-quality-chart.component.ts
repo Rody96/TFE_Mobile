@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { ViewChild } from '@angular/core';
 import {
   ChartComponent,
@@ -22,20 +23,20 @@ export type ChartOptions = {
 };
 
 @Component({
-  selector: 'app-temp-chart',
-  templateUrl: './temp-chart.component.html',
-  styleUrls: ['./temp-chart.component.scss']
+  selector: 'app-air-quality-chart',
+  templateUrl: './air-quality-chart.component.html',
+  styleUrls: ['./air-quality-chart.component.scss']
 })
-export class TempChartComponent implements OnInit {
+export class AirQualityChartComponent implements OnInit {
 
-  @ViewChild("temperatureChart") chart: ChartComponent;
+  @ViewChild("airQualityChart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
 
   constructor() {
     this.chartOptions = {
       series: [
         {
-          name: "temperature",
+          name: "Air Quality",
           data: [10, 41, 35, 51, 49, 62, 69]
         }
       ],
@@ -53,7 +54,7 @@ export class TempChartComponent implements OnInit {
         curve: "straight"
       },
       title: {
-        text: "Temperature",
+        text: "Air Quality",
         align: "left"
       },
       grid: {
@@ -79,5 +80,4 @@ export class TempChartComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TemperatureService} from '../services/temperature.service';
+import {HumidityService} from '../services/humidity.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -13,20 +14,11 @@ export class HomepageComponent implements OnInit {
   measurements: any[];
   homepageSubscription: Subscription;
   
-  constructor(private temperatureService: TemperatureService) { }
+  constructor(private humidityService: HumidityService) { }
 
   ngOnInit() {
-    this.getTemp();
-    this.homepageSubscription = this.temperatureService.measurementsSubject.subscribe(
-      (measurements: any[]) => {
-        this.measurements = measurements;
-      }
-    );
-    this.temperatureService.emitMeasurementsSubject();
+
   }
 
-  getTemp(){
-    this.temperatureService.getTempValues();
-  }
 
 }

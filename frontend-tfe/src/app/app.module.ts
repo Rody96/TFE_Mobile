@@ -12,6 +12,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TemperatureService } from './services/temperature.service';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { TempChartComponent } from './temp-chart/temp-chart.component';
+import { HumidityChartComponent } from './humidity-chart/humidity-chart.component';
+import { AirQualityChartComponent } from './air-quality-chart/air-quality-chart.component';
+import { HumidityService } from './services/humidity.service';
 
 const appRoutes: Routes = [
   { path: '', component: HomepageComponent },
@@ -21,7 +24,9 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HomepageComponent,
-    TempChartComponent
+    TempChartComponent,
+    HumidityChartComponent,
+    AirQualityChartComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,7 @@ const appRoutes: Routes = [
     NgApexchartsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [TemperatureService],
+  providers: [TemperatureService, HumidityService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
