@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TemperatureService} from '../services/temperature.service';
-import { HttpClient } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-homepage',
@@ -10,18 +10,23 @@ import { HttpClient } from '@angular/common/http';
 export class HomepageComponent implements OnInit {
 
   //tempId: any = 5;
-  measurements;
+  measurements: any[];
+  homepageSubscription: Subscription;
   
-  constructor(private http: HttpClient) { }
+  constructor(private temperatureService: TemperatureService) { }
 
-  ngOnInit(): void {
-    
-      this.http.get<any[]>('https://rodrigue-projects.site/temperature/5')
-    .subscribe(
-      data => {
-        this.measurements = data['temperature'];
-    })
-  
+  ngOnInit() {
+    this.getTemp();
+    this.homepageSubscription = this.temperatureService.measurementsSubject.subscribe(
+      (measurements: any[]) => {
+        this.measurements = measurements;
+      }
+    );
+    this.temperatureService.emitMeasurementsSubject();
+  }
+
+  getTemp(){
+    this.temperatureService.getTempValues();
   }
 
 }
