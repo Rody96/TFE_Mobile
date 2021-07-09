@@ -15,6 +15,7 @@ import { TempChartComponent } from './temp-chart/temp-chart.component';
 import { HumidityChartComponent } from './humidity-chart/humidity-chart.component';
 import { AirQualityChartComponent } from './air-quality-chart/air-quality-chart.component';
 import { HumidityService } from './services/humidity.service';
+import { ExampleChartComponent } from './example-chart/example-chart.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomepageComponent },
@@ -26,7 +27,8 @@ const appRoutes: Routes = [
     HomepageComponent,
     TempChartComponent,
     HumidityChartComponent,
-    AirQualityChartComponent
+    AirQualityChartComponent,
+    ExampleChartComponent
   ],
   imports: [
     BrowserModule,

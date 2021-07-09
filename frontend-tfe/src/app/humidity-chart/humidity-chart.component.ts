@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import {HumidityService} from '../services/humidity.service';
+import { HttpClient } from '@angular/common/http';
+
 import {
   ChartComponent,
   ApexAxisChartSeries,
@@ -32,23 +34,17 @@ export class HumidityChartComponent implements OnInit {
 
   @ViewChild("humidityChart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
-  measurements = [22,23,24,25,26,27,28,29,30];
+  measurements = [];
+  dates = []
   homepageSubscription: Subscription;
 
-  constructor(private humidityService: HumidityService) {
-    this.getHum();
-    console.log("HUM"+ this.measurements)
-  }
-
-  ngOnInit(): void {
-    this.homepageSubscription = this.humidityService.measurementsSubject.subscribe(
-      (humidityMeasurements: any[]) => {
-        //this.measurements = humidityMeasurements;
-      }
-    );
-    
-    this.humidityService.emitMeasurementsSubject();
-
+  constructor(private httpClient: HttpClient) {
+    for(let i=1;i<60;i++){
+    this.httpClient.get('https://rodrigue-projects.site/humidity/'+i).subscribe(
+      (res) => {this.measurements.push(res["airHumidity"]); this.dates.push(res["createdAt"])},
+      (error) => { console.log(error);}
+      );
+    }
     this.chartOptions = {
       series: [
         {
@@ -80,24 +76,13 @@ export class HumidityChartComponent implements OnInit {
         }
       },
       xaxis: {
-        categories: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep"
-        ]
+        categories: this.dates
       }
     };
-    //console.log(this.measurements)
+    console.log(this.dates)
   }
 
-  getHum(){
-    this.humidityService.getHumValues();
+  ngOnInit(): void {
+   
   }
-
 }
