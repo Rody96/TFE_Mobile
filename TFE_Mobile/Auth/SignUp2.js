@@ -11,7 +11,7 @@ class SignUpStep2 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: this.props.route.params.name,
+      lastName: this.props.route.params.lastName,
       firstName: this.props.route.params.firstName,
       email: '',
       password1: '',
@@ -31,12 +31,12 @@ class SignUpStep2 extends React.Component {
    * Par la suite si le compte n'existe pas alors 
    */
   _testFiledField = () => {
-    if (this.state.name.length > 0 & this.state.firstName.length > 0 & this.state.email.length > 0
+    if (this.state.lastName.length > 0 & this.state.firstName.length > 0 & this.state.email.length > 0
       & this.state.password1.length > 0 & this.state.password2.length > 0) {
       this.setState({ filedField: true }, () => {
         if (this.input.isValid() & this.state.password1 === this.state.password2 & this.state.filedField) {
           this.setState({ validField: true }, () => {
-            fetch("https://pi2-ephec.herokuapp.com/users/signup", {
+            fetch("https://rodrigue-projects.site/users/signup", {
               method: "POST",
               headers: {
                 'Content-Type': 'application/json'
@@ -45,15 +45,15 @@ class SignUpStep2 extends React.Component {
                 "mail": this.state.email,
                 "password": this.state.password1,
                 "firstName": this.state.firstName,
-                "lastName": this.state.name,
-                "learningMode": false
+                "lastName": this.state.lastName,
+                "fanState": false
               })
             })
               .then(res => res.text())
               .then(data => {
                 console.log(data)
                 if (data === '"successCreation"') {
-                  this.props.navigation.navigate('SignUpStep3',
+                  this.props.navigation.navigate('SignUp3',
                     {
                       firstName: this.state.firstName
                     })
@@ -82,12 +82,12 @@ class SignUpStep2 extends React.Component {
   render() {
     return (
       <LinearGradient
-        colors={['#588B43', '#373b44']}//#999966 373b44 5a3f37
+      colors={['#67B26F', '#4ca2cd']}//#999966 373b44 5a3f37
         style={styles.linearGradient}
       >
-        <TouchableOpacity style={styles.stepBack_container} onPress={() => { this.props.navigation.goBack() }}>
+        {/* <TouchableOpacity style={styles.stepBack_container} onPress={() => { this.props.navigation.goBack() }}>
           <FontAwesomeIcon icon={faArrowLeft} style={{ color: 'white' }} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <View style={styles.main_container}>
 
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
   },
   step_button: {
     width: 140,
-    backgroundColor: '#577B43',
+    backgroundColor: '#26c2e3',
     borderRadius: 15,
     height: 50,
     marginTop: 40,

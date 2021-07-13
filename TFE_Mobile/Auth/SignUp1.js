@@ -10,7 +10,7 @@ class SignUpStep1 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      lastName: '',
       firstName: '',
       testBot: '',
       active: true
@@ -20,18 +20,16 @@ class SignUpStep1 extends React.Component {
   render() {
     return (
       <LinearGradient
-        colors={['#588B43', '#373b44']}//#999966 373b44 5a3f37
+      colors={['#67B26F', '#4ca2cd']}
         style={styles.linearGradient}
       >
-
-        <TouchableOpacity style={styles.stepBack_container} onPress={() => { this.props.navigation.openDrawer() }}>
+        
+        {/* <TouchableOpacity style={styles.stepBack_container} onPress={() => { this.props.navigation.openDrawer() }}>
           <FontAwesomeIcon icon={faArrowLeft} style={{ color: 'white' }} />
-        </TouchableOpacity>
-
+        </TouchableOpacity> */}
+        
 
         <View style={styles.main_container}>
-
-
 
           <View><Text style={styles.title_Screen}>Inscription</Text></View>
 
@@ -39,8 +37,8 @@ class SignUpStep1 extends React.Component {
             <View style={styles.icon_inputText}><FontAwesomeIcon icon={faUser} /></View>
             <TextInput
               placeholder="Nom"
-              value={this.state.name}
-              onChangeText={(text => this.setState({ name: text }))}
+              value={this.state.lastName}
+              onChangeText={(text => this.setState({ lastName: text }))}
               style={styles.inputText} />
           </View>
 
@@ -68,9 +66,9 @@ class SignUpStep1 extends React.Component {
           <View>
             <TouchableOpacity style={styles.step_button} onPress={() => {
               this.state.testBot === '' ?
-                (this.props.navigation.navigate('SignUpStep2',
+                (this.props.navigation.navigate('SignUp2',
                   {
-                    name: this.state.name,
+                    lastName: this.state.lastName,
                     firstName: this.state.firstName
                   })) : (alert('Alerte bot'))
 
@@ -81,7 +79,7 @@ class SignUpStep1 extends React.Component {
 
           <View style={styles.info_container}>
             <Text style={styles.info_text} >Vous avez déjà un compte ?</Text>
-            <TouchableOpacity onPress={() => { this.props.navigation.navigate('Connexion') }}>
+            <TouchableOpacity onPress={() => { this.props.navigation.navigate('Login') }}>
               <Text style={styles.redirect_signIn_text}>Connexion</Text>
             </TouchableOpacity>
           </View>
@@ -172,7 +170,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   redirect_signIn_text: {
-    color: '#577B43',
+    color: '#26c2e3',
     fontWeight: 'bold'
   },
   checkbox: {
@@ -183,7 +181,7 @@ const styles = StyleSheet.create({
   },
   step_button: {
     width: 170,
-    backgroundColor: '#577B43',
+    backgroundColor: '#26c2e3',
     borderRadius: 15,
     height: 50,
     marginTop: 40,

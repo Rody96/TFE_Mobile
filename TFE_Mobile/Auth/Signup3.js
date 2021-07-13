@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient'
 
 
@@ -7,24 +7,24 @@ class SignUpStep3 extends React.Component {
 
     render() {
         return (
-            <LinearGradient colors={['#588B43', '#373b44']} style={styles.linearGradient}>
+            <LinearGradient colors={['#67B26F', '#4ca2cd']} style={styles.linearGradient}>
 
                 <View style={styles.container_one}>
-                    <Text style={{ color: '#f1f1f1', fontSize: 32, fontFamily: "Cochin" }}>Bienvenue sur eGrow</Text>
+                    <Text style={{ color: '#f1f1f1', fontSize: 32, fontFamily: "Cochin" }}>Merci de votre inscription</Text>
                 </View>
 
+                <Image
+                style={styles.appIcon}
+                  source={require('../Images/check.png')}
+                />
+
                 <View style={styles.container_two}>
-                    <Text style={{ color: '#f1f1f1', fontSize: 18 }}>Merci
-                        <Text style={{ color: '#f1f1f1', fontWeight: 'bold', fontSize: 18 }}> {this.props.route.params.firstName} </Text>
-                    pour votre inscription</Text>
-                    <Text style={{ color: '#f1f1f1', marginTop: 10, fontSize: 18 }}>Votre compte a bien été créé</Text>
+                    <Text style={{ color: '#f1f1f1', marginTop: 10, fontSize: 25 }}>Votre compte a bien été créé</Text>
                 </View>
 
                 <View style={styles.container_three}>
-                    <TouchableOpacity onPress={() => { this.props.navigation.navigate('Connexion') }}>
-                        <Text style={{ color: '#f1f1f1', fontSize: 15 }}>Connectez vous
-                        <Text style={{ color: '#588B43', fontWeight: 'bold', fontSize: 15 }}> ici </Text>
-                        maintenant</Text>
+                    <TouchableOpacity style={styles.toLogin} onPress={() => { this.props.navigation.navigate('Login') }}>
+                        <Text style={{ color: '#f1f1f1', fontSize: 20 }}>Connectez vous ici</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -53,6 +53,21 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
+    toLogin: {
+        width: 270,
+        backgroundColor: '#26c2e3',
+        borderRadius: 25,
+        height: 50,
+        alignItems: "center",
+        justifyContent: "center",
+
+    },
+    appIcon: {
+        justifyContent: 'center',
+        alignItems: "center",
+        marginLeft: 145,
+        marginTop: 20
+    }
 })
 
 export default SignUpStep3

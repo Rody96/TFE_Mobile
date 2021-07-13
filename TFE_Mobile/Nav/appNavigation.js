@@ -5,7 +5,7 @@ import SignIn from "../Auth/SignIn";
 import SimpleComponent from "../Components/simpleComponent";
 import SignUp1 from "../Auth/SignUp1";
 import SignUp2 from "../Auth/SignUp2";
-import SignUp3 from '../Auth/Signup3';
+import SignUp3 from '../Auth/SignUp3';
 import { createStackNavigator } from '@react-navigation/stack';
 
 
@@ -17,7 +17,7 @@ function MyApp() {
       <Stack1.Navigator>
         <Stack1.Screen name="Login" component={SignIn}/>
         <Stack1.Screen name="Home" component={SimpleComponent} />
-        <Stack1.Screen name="Signup" component={SignUpNavigation} />
+        <Stack1.Screen name="SignUp" component={SignUpNavigation} />
       </Stack1.Navigator>
     </NavigationContainer>
   );
