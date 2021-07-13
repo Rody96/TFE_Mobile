@@ -1,4 +1,11 @@
 {
-  "name": "TFE_Mobile",
-  "displayName": "TFE_Mobile"
+  "expo": {
+    "name": "TFE_Mobile",
+    "slug": "TFE_Mobile",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "TFE_Mobile"
 }

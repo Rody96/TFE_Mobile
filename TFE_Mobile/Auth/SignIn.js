@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView, TextInput, TouchableOpacity,Image } from 'react-native';
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import LinearGradient from 'react-native-linear-gradient'
@@ -35,7 +37,7 @@ class SignIn extends React.Component {
             this.setState({ email: text })
             console.log("Email format is correct");
 
-            fetch("https://pi2-ephec.herokuapp.com/users/signin", {
+            fetch("https://rodrigue-projects.site/users/signin", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -55,7 +57,7 @@ class SignIn extends React.Component {
                         this.setState({ userId: json[0].id })
                         this._changeGlobalState();
                         this.storeData();
-                        this.props.navigation.navigate("Accueil")
+                        this.props.navigation.navigate("Home")
                     }
                 })
                 .catch((error) => {
@@ -84,7 +86,7 @@ class SignIn extends React.Component {
                     <View><Text style={styles.title_Screen}>AirQualityControl</Text></View>
 
                     <View style={styles.inputView}>
-                        <View style={styles.iconTextInput}></View>
+                    <View style={styles.icon_inputText}><FontAwesomeIcon icon={faUser} /></View>
                         <TextInput
                             placeholder="Email"
                             value={this.state.email}
@@ -95,7 +97,7 @@ class SignIn extends React.Component {
                     </View>
 
                     <View style={styles.inputView}>
-                        <View style={styles.iconTextInput}></View>
+                    <View><FontAwesomeIcon icon={faKey} /></View>
                         <TextInput
                             secureTextEntry={true}
                             placeholder="Password"
@@ -161,9 +163,6 @@ const styles = StyleSheet.create({
     },
     inputText: {
         width: 270,
-        padding: 10,
-    },
-    iconTextInput: {
         padding: 10,
     },
     redirect_signin_text: {

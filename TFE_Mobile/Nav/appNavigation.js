@@ -1,8 +1,8 @@
 import * as React from "react";
 import { NavigationContainer } from '@react-navigation/native';
-//import Navigation5 from "./Navigation5";
+import Navigation from "./bottomNav";
 import SignIn from "../Auth/SignIn";
-import SimpleComponent from "../Components/simpleComponent";
+//import SimpleComponent from "../Components/simpleComponent";
 import SignUp1 from "../Auth/SignUp1";
 import SignUp2 from "../Auth/SignUp2";
 import SignUp3 from '../Auth/SignUp3';
@@ -15,9 +15,9 @@ function MyApp() {
   return (
     <NavigationContainer>
       <Stack1.Navigator>
-        <Stack1.Screen name="Login" component={SignIn}/>
-        <Stack1.Screen name="Home" component={SimpleComponent} />
-        <Stack1.Screen name="SignUp" component={SignUpNavigation} />
+        <Stack1.Screen name="Login" component={SignIn} options={{ headerShown: false }}/>
+        <Stack1.Screen name="Home" component={Navigation} options={{ headerShown: false }} />
+        <Stack1.Screen name="SignUp" component={SignUpNavigation} options={{ headerShown: false }}/>
       </Stack1.Navigator>
     </NavigationContainer>
   );
