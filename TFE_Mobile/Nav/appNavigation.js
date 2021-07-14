@@ -1,12 +1,12 @@
 import * as React from "react";
 import { NavigationContainer } from '@react-navigation/native';
-import Navigation from "./bottomNav";
+import Tabs from "./bottomNav";
 import SignIn from "../Auth/SignIn";
-//import SimpleComponent from "../Components/simpleComponent";
 import SignUp1 from "../Auth/SignUp1";
 import SignUp2 from "../Auth/SignUp2";
 import SignUp3 from '../Auth/SignUp3';
 import { createStackNavigator } from '@react-navigation/stack';
+import HomeScreen from "../Components/HomeScreen";
 
 
 const Stack1 = createStackNavigator();
@@ -16,7 +16,7 @@ function MyApp() {
     <NavigationContainer>
       <Stack1.Navigator>
         <Stack1.Screen name="Login" component={SignIn} options={{ headerShown: false }}/>
-        <Stack1.Screen name="Home" component={Navigation} options={{ headerShown: false }} />
+        <Stack1.Screen name="Home" component={Tabs} options={{ headerShown: false }} />
         <Stack1.Screen name="SignUp" component={SignUpNavigation} options={{ headerShown: false }}/>
       </Stack1.Navigator>
     </NavigationContainer>

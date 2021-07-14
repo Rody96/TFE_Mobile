@@ -23,7 +23,7 @@ class SignIn extends React.Component {
      * Si tous les champs sont valides et l'utilisateur existe en base de données, alors l'utilisateur sera redirigé vers l'accueil.
      *
      */
-    /*
+    
     validate = (text) => {
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
@@ -55,8 +55,10 @@ class SignIn extends React.Component {
                     else {
                         console.log("OK");
                         this.setState({ userId: json[0].id })
-                        this._changeGlobalState();
-                        this.storeData();
+                        //this._changeGlobalState();
+                        //this.storeData();
+                        console.log(this.state.email);
+                        console.log(this.state.password);
                         this.props.navigation.navigate("Home")
                     }
                 })
@@ -65,7 +67,7 @@ class SignIn extends React.Component {
                 });
         }
     }
-    */
+    
 
     render() {
 
@@ -103,6 +105,8 @@ class SignIn extends React.Component {
                             placeholder="Password"
                             style={styles.inputText}
                             value={this.state.password}
+                            ref={input => { this.passwordtextInput = input }}
+                            onChangeText={(text => this.setState({ password: text }))}
                         />
                     </View>
 
