@@ -2,20 +2,44 @@ import React from "react";
 import {
   StyleSheet, Text, View, Image, TouchableOpacity, ActivityIndicator, ScrollView,
 } from "react-native";
+import { getPPMByID } from "../HttpRequests/getPPM";
+
 class AirQualityScreen extends React.Component {
 
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ppm: 0,
+      isLoading: true
+    };
+  }
 
+  componentDidMount() {
+    getPPMByID(48).then((data) => {
+      //console.log(data)
+      this.setState({
+        ppm: data["ppm"],
+        isLoading: false
+      })
+    });
   }
 
 
   render() {
 
     return (
+      
       <View style={styles.container}>
+        {this.state.isLoading ? (
+          <View style={styles.loading_container}>
+            <ActivityIndicator size="large" color="#0000ff" />
+              </View>
+        ) : 
+        (
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>AirQuality</Text>
+          <Text style={styles.title}>{this.state.ppm}PPM</Text>
         </View>
+        )}
       </View>
     );
   }
@@ -37,7 +61,7 @@ const styles = {
     color: "gray",
     textAlign: "center",
     textAlignVertical: "center",
-    fontSize: 35,
+    fontSize: 50,
     marginLeft: "3%",
   },
   titleContainer: {
@@ -46,41 +70,5 @@ const styles = {
     backgroundColor: "gainsboro",
     flexDirection: "row",
     marginLeft: "5%",
-  },
-  image: {
-    flex: 1,
-    borderRadius: 2000,
-    width: "80%",
-    height: "100%",
-    backgroundColor: "white",
-  },
-  imageContainer: {
-    flex: 1,
-    marginTop: "3%",
-    marginBottom: "3%",
-  },
-  itemContainer: {
-    flex: 4,
-    width: "100%",
-    backgroundColor: "gainsboro",
-    justifyContent: "center",
-    alignContent: "center",
-  },
-  line: {
-    flex: 0,
-    height: "0.5%",
-    width: "65%",
-    backgroundColor: "silver",
-    borderRadius: 100,
-    alignSelf: "center",
-    marginTop: "1%",
-  },
-  headInfos: {
-    alignSelf: "center",
-    color: "gray",
-  },
-  deleteButton: {
-    marginTop: "5%",
-    alignSelf: "center",
   },
 };

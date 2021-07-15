@@ -6,6 +6,7 @@ import Notifications from "../Components/Notifications";
 import Settings from "../Components/Settings";
 import HomeScreen from "../Components/HomeScreen";
 //import CustomHeader from "./Header/CustomHeader";
+import MeasurementsNavigation from "../Nav/MeasNavigation";
 import { Container } from "native-base";
 
 const bottomNav = createBottomTabNavigator();
@@ -20,7 +21,7 @@ function Tabs(){
       showIcon: true // On informe le TabNavigator qu'on souhaite afficher les icônes définies
     }}
     >
-      <bottomNav.Screen name="Home" component={HomeScreen} 
+      <bottomNav.Screen name="Home" component={MeasurementsNavigation} 
         options={{
           tabBarIcon: () => {
             return <FontAwesomeIcon icon={faHome} />;

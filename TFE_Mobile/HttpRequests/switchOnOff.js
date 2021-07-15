@@ -1,4 +1,3 @@
-import React from "react";
 
 export function postOnOfftoApi (fanState,id) {
     const url = "https://rodrigue-projects.site/users/updateFanState?fanState="+ fanState +"&id=" + id ;
