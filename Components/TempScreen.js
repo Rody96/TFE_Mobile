@@ -16,7 +16,7 @@ class TempScreen extends React.Component {
   }
 
   componentDidMount() {
-    getTempByID(5).then((data) => {
+    getTempByID(60).then((data) => {
       //console.log(data)
       this.setState({
         temp: data["temperature"],

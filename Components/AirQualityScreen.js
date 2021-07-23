@@ -15,7 +15,7 @@ class AirQualityScreen extends React.Component {
   }
 
   componentDidMount() {
-    getPPMByID(48).then((data) => {
+    getPPMByID(60).then((data) => {
       //console.log(data)
       this.setState({
         ppm: data["ppm"],
