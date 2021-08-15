@@ -3,8 +3,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import Tabs from "./bottomNav";
 import SignIn from "../Auth/SignIn";
 import SignUp from "../Auth/SignUp";
-import SignUp2 from "../Auth/SignUp2";
-import SignUp3 from '../Auth/SignUp3';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from "../Components/HomeScreen";
 import LoginControl from "../Auth/LoginControl";

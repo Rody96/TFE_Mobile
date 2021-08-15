@@ -167,7 +167,8 @@ const styles = StyleSheet.create({
         marginTop: 30,
         fontSize: 35,
         color: 'white',
-        marginBottom: 25
+        marginBottom: 25,
+        fontFamily: 'serif'
     },
     inputView: {
         height: 37,

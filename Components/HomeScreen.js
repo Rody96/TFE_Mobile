@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  StyleSheet, Text, View, Image, TouchableOpacity, ActivityIndicator, ScrollView,Alert
+  StyleSheet, Text, View, Image, TouchableOpacity, ActivityIndicator, ScrollView,Alert, StatusBar
 } from "react-native";
 import {postOnOfftoApi} from '../HttpRequests/switchOnOff'
 import LinearGradient from 'react-native-linear-gradient';
@@ -9,6 +9,7 @@ import deviceStorage from "../services/deviceStorage";
 import { connect } from "react-redux";
 import store from "../redux/store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getFanState } from "../HttpRequests/getFanState";
 
 class HomeScreen extends React.Component {
 
@@ -16,10 +17,15 @@ class HomeScreen extends React.Component {
     super(props);
     this.loadJWT();
     this.state = {
+      backgroundColor: '#b4b8b5',
       led: false,
       loading:''
     };
     }
+
+  onClick(value) {
+    this.setState({ backgroundColor: value });
+  }
 
   componentDidMount() {
     console.log('HOMESCREEN', store.getState().accessToken)
@@ -46,17 +52,19 @@ class HomeScreen extends React.Component {
     }
   }
 
+  
+
   onPressButton() {
     if(this.state.led == false){
       this.state.led = true;
-      postOnOfftoApi(this.state.led,1);
-      console.log(this.state.led)
+      postOnOfftoApi(this.state.led,4);
+      this.onClick("#52eb34");
       Alert.alert('On')  
     }
     else if(this.state.led == true){
       this.state.led = false;
-      postOnOfftoApi(this.state.led,1);
-      console.log(this.state.led)
+      postOnOfftoApi(this.state.led,4);
+      this.onClick("#f71919");
       Alert.alert('Off') 
     }
   }
@@ -81,9 +89,15 @@ class HomeScreen extends React.Component {
                 style={styles.linearGradient}
             >
       <View style={styles.container}>
-        <Text style={{margin:40, fontSize: 30, fontWeight:"bold"}}>Room</Text>
+        <Text style={{margin:40, fontSize: 30, fontWeight:"bold"}}>Chambre</Text>
         <View style={{flex:1, flexDirection:'row', alignItems: 'center',justifyContent: 'center',margin:100}}>
-          <TouchableOpacity style={styles.btn1} onPress={this.onPressButton.bind(this)}
+          <TouchableOpacity 
+          style={{ 
+            backgroundColor: this.state.backgroundColor, borderRadius: 25,
+            height: 120,
+            alignItems: "center",
+            justifyContent: "center",
+            margin: 40, }} onPress={this.onPressButton.bind(this)}
           >
             <Image
               style={styles.appIcon}
@@ -125,7 +139,7 @@ class HomeScreen extends React.Component {
               store.dispatch({ type: "SET_TOKEN", value: null });
               this.deleteJWT()
             }}>
-              Log Out
+              Déconnexion
         </Button>
         
       </View>
@@ -153,7 +167,6 @@ const styles = {
   },
   btn1: {
     width: 120,
-        backgroundColor: '#b4b8b5',
         borderRadius: 25,
         height: 120,
         alignItems: "center",
@@ -176,7 +189,7 @@ const styles = {
         height: 120,
         alignItems: "center",
         justifyContent: "center",
-        margin: 40
+        margin: 40,
   },
   btn4: {
     width: 120,

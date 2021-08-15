@@ -1,6 +1,6 @@
 //App.js 
 import React, { Component } from 'react';
-import { Loading } from './common';
+import { StatusBar } from 'react-native';
 import Auth from './Screens/Auth';
 import { NativeBaseProvider } from 'native-base';
 import MyApp from './Nav/appNavigation'
@@ -12,6 +12,11 @@ import { Provider } from 'react-redux'
 import Store from './redux/store'
 
 export default class App extends Component {
+
+  componentDidMount() {
+    StatusBar.setBarStyle( 'light-content',true)
+    StatusBar.setBackgroundColor("#67B26F")
+  }
 
   render() {
       return (

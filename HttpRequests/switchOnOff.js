@@ -1,6 +1,6 @@
 
 export function postOnOfftoApi (fanState,id) {
-    const url = "https://rodrigue-projects.site/users/updateFanState?fanState="+ fanState +"&id=" + id ;
+    const url = "https://rodrigue-projects.site/fan/updateFanState?fanState="+ fanState +"&id=" + id ;
     fetch(url, {
       method: 'PATCH',
       headers: {
