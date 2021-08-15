@@ -4,17 +4,46 @@ import {
 } from "react-native";
 import {postOnOfftoApi} from '../HttpRequests/switchOnOff'
 import LinearGradient from 'react-native-linear-gradient';
+import { Button } from "../common";
+import deviceStorage from "../services/deviceStorage";
+import { connect } from "react-redux";
+import store from "../redux/store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 class HomeScreen extends React.Component {
 
   constructor(props) {
     super(props);
+    this.loadJWT();
     this.state = {
       led: false,
+      loading:''
     };
     }
 
   componentDidMount() {
+    console.log('HOMESCREEN', store.getState().accessToken)
+  }
 
+  loadJWT = async () => {
+    try {
+      const value = await AsyncStorage.getItem('id_token');
+      if (value !== null) {
+        console.log(value)
+      }
+    } catch (error) {
+      console.log('AsyncStorage Error: ' + error.message);
+    }
+  }
+
+  deleteJWT = async () => {
+    try{
+      console.log("DELETE")
+      await AsyncStorage.clear()
+      console.log("LoggedOut")
+    } catch (error) {
+      console.log('AsyncStorage Error: ' + error.message);
+    }
   }
 
   onPressButton() {
@@ -91,6 +120,13 @@ class HomeScreen extends React.Component {
             />
           </TouchableOpacity>
         </View>
+
+        <Button onPress={() => {
+              store.dispatch({ type: "SET_TOKEN", value: null });
+              this.deleteJWT()
+            }}>
+              Log Out
+        </Button>
         
       </View>
       </LinearGradient>
@@ -98,7 +134,13 @@ class HomeScreen extends React.Component {
   }
 }
 
-export default HomeScreen;
+const mapStateToProps = (state) => {
+  return {
+      accessToken: state.accessToken,
+  }
+}
+
+export default connect(mapStateToProps)(HomeScreen);
 
 
 const styles = {

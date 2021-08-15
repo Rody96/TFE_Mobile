@@ -10,9 +10,11 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-native-fontawesome": "^0.2.6",
+    "@react-native-async-storage/async-storage": "^1.15.5",
     "@react-navigation/bottom-tabs": "^5.11.11",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.5",
+    "axios": "^0.21.1",
     "expo": "~42.0.1",
     "expo-splash-screen": "~0.11.2",
     "expo-status-bar": "~1.0.4",
@@ -21,6 +23,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "~0.63.4",
+    "react-native-axios-jwt": "^1.1.0",
     "react-native-gesture-handler": "~1.10.2",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-reanimated": "~2.2.0",
@@ -31,7 +34,9 @@
     "react-native-unimodules": "~0.14.5",
     "react-native-web": "~0.13.12",
     "react-navigation": "^4.4.4",
-    "react-navigation-stack": "^2.10.4"
+    "react-navigation-stack": "^2.10.4",
+    "redux": "^4.1.1",
+    "react-redux": "^7.2.4"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

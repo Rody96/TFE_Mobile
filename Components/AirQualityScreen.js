@@ -2,7 +2,7 @@ import React from "react";
 import {
   StyleSheet, Text, View, Image, TouchableOpacity, ActivityIndicator, ScrollView,
 } from "react-native";
-import { getPPMByID } from "../HttpRequests/getPPM";
+import { getPPM } from "../HttpRequests/getPPM";
 
 class AirQualityScreen extends React.Component {
 
@@ -15,10 +15,14 @@ class AirQualityScreen extends React.Component {
   }
 
   componentDidMount() {
-    getPPMByID(60).then((data) => {
+    getPPM().then((data) => {
       //console.log(data)
+      let tab = [];
+      tab = data;
+      let lastMeasurement = tab[tab.length - 1];
+      //console.log(lastMeasurement)
       this.setState({
-        ppm: data["ppm"],
+        ppm: lastMeasurement["ppm"],
         isLoading: false
       })
     });
@@ -37,7 +41,7 @@ class AirQualityScreen extends React.Component {
         ) : 
         (
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>{this.state.ppm}PPM</Text>
+          <Text style={styles.title}>{this.state.ppm} PPM</Text>
         </View>
         )}
       </View>

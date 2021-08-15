@@ -2,7 +2,7 @@ import React from "react";
 import {
   StyleSheet, Text, View, Image, TouchableOpacity, ActivityIndicator, ScrollView,
 } from "react-native";
-import { getTempByID } from "../HttpRequests/getTemperature";
+import { getTemp } from "../HttpRequests/getTemperature";
 
 class TempScreen extends React.Component {
 
@@ -16,10 +16,12 @@ class TempScreen extends React.Component {
   }
 
   componentDidMount() {
-    getTempByID(60).then((data) => {
-      //console.log(data)
+    getTemp().then((data) => {
+      let tab = [];
+      tab = data;
+      let lastMeasurement = tab[tab.length - 1];
       this.setState({
-        temp: data["temperature"],
+        temp: lastMeasurement["temperature"],
         isLoading: false
       })
     });

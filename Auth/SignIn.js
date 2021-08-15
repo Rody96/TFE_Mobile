@@ -1,11 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, TextInput, TouchableOpacity,Image } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TextInput, TouchableOpacity,Image, ActivityIndicator } from 'react-native';
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { connect } from "react-redux";
+import store from "../redux/store";
 import LinearGradient from 'react-native-linear-gradient'
-
+import axios from 'axios';
+import { Loading } from '../common';
+import deviceStorage from '../services/deviceStorage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 class SignIn extends React.Component {
 
     constructor(props) {
@@ -13,63 +16,73 @@ class SignIn extends React.Component {
         this.state = {
             email: '',
             password: '',
-            userId: null
+            error: '',
+            loading: false
+        }
+
+        this.loginUser = this.loginUser.bind(this);
+        this.onLoginFail = this.onLoginFail.bind(this);
+    }
+      
+    saveKey = async (key, valueToSave) => {
+        try {
+          await AsyncStorage.setItem(key, valueToSave);
+          this.props.dispatch({type: "SET_TOKEN", value: valueToSave})
+          console.log("SAVEKEY", key + " " +  valueToSave)
+        } catch (error) {
+          console.log('AsyncStorage Error: ' + error.message);
         }
     }
 
-    /**
-     * Cette fonction permet de vérifier la validité de l'email et de se connecter.
-     * Une alerte s'affichera si les champs sont vides, l'email n'est pas valide ou n'existe pas, le mot de passe est incorrect.
-     * Si tous les champs sont valides et l'utilisateur existe en base de données, alors l'utilisateur sera redirigé vers l'accueil.
-     *
-     */
+    loginUser(text) {
+        const { email, password} = this.state;
     
-    validate = (text) => {
+        this.setState({ error: '', loading: true });
+
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
         if (this.state.email.length == 0 || this.state.password.length == 0) {
-            alert('Champ(s) incomplet(s) !')
+            this.setState({
+                error: 'Champ(s) incomplet(s)',
+                loading: false
+            });
+            console.log("HEY")
+            return false;
         } else if (reg.test(text) === false) {
-            alert('Adresse email non valide');
+            this.setState({
+                error: 'Adresse email non valide',
+                loading: false
+            });
             this.setState({ email: text })
             return false;
         } else if (this.state.email.length > 0 & this.state.password.length > 0 & reg.test(text) === true) {
-            this.setState({ email: text })
-            console.log("Email format is correct");
-
-            fetch("https://rodrigue-projects.site/users/signin", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    "mail": this.state.email,
-                    "password": this.state.password
-                })
-            }).then((response) => response.json())
-                .then((json) => {
-                    if (json === 'email/password incorrect') {
-                        console.log("NOK");
-                        alert(json)
-                    }
-                    else {
-                        console.log("OK");
-                        this.setState({ userId: json[0].id })
-                        //this._changeGlobalState();
-                        //this.storeData();
-                        console.log(this.state.email);
-                        console.log(this.state.password);
-                        this.props.navigation.navigate("Home")
-                    }
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        }
-    }
     
+            axios.post("https://rodrigue-projects.site/api/auth/signin",{
+                mail: email,
+                password: password
+            })
+            .then((response) => {
+              this.saveKey("id_token", response.data.accessToken);
+              this.props.navigation.navigate("Home")
+            })
+            .catch((error) => {
+              console.log(error);
+              this.onLoginFail();
+            });
+        }
+      }
+    
+      onLoginFail() {
+        this.setState({
+          error: 'Adresse mail ou mot de passe incorrect',
+          loading: false
+        });
+      }
 
     render() {
+
+        const { email, password, error, loading } = this.state;
+        const { form, section, errorTextStyle } = styles;
 
         return (
             <LinearGradient
@@ -91,8 +104,9 @@ class SignIn extends React.Component {
                     <View style={styles.icon_inputText}><FontAwesomeIcon icon={faUser} /></View>
                         <TextInput
                             placeholder="Email"
-                            value={this.state.email}
-                            onChangeText={(text => this.setState({ email: text }))}
+                            label="Email"
+                            value={email}
+                            onChangeText={email => this.setState({ email })}
                             ref={input => { this.emailTextInput = input }}
                             style={styles.inputText}
                         />
@@ -103,23 +117,28 @@ class SignIn extends React.Component {
                         <TextInput
                             secureTextEntry={true}
                             placeholder="Password"
+                            label="Password"
                             style={styles.inputText}
-                            value={this.state.password}
+                            value={password}
                             ref={input => { this.passwordtextInput = input }}
-                            onChangeText={(text => this.setState({ password: text }))}
+                            onChangeText={password => this.setState({ password })}
                         />
                     </View>
 
+                    <Text style={errorTextStyle}>
+                        {error}
+                    </Text>
 
                     <View>
                         <TouchableOpacity style={styles.loginBtn} onPress={() => {
-                            { this.validate(this.state.email) };
+                            { this.loginUser(this.state.email) }
                             { this.emailTextInput.clear() };
                             { this.passwordtextInput.clear() }
                         }}
                         >
                             <Text style={styles.loginText}>Se connecter</Text>
                         </TouchableOpacity>
+                        
                     </View>
 
                     <View style={styles.info_container}>
@@ -203,7 +222,23 @@ const styles = StyleSheet.create({
     },
     appIcon:{
       marginTop:50
-    }
+    },
+    errorTextStyle: {
+        alignSelf: 'center',
+        fontSize: 18,
+        color: 'red'
+    },
+    spinnerContainer: {
+        flex: -1,
+        marginTop: 12,
+        marginBottom: 12
+      }
 })
 
-export default SignIn
+const mapStateToProps = (state) => {
+    return {
+        accessToken: state.accessToken,
+    }
+  }
+
+export default connect(mapStateToProps)(SignIn)

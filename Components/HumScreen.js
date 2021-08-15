@@ -2,7 +2,7 @@ import React from "react";
 import {
   StyleSheet, Text, View, Image, TouchableOpacity, ActivityIndicator, ScrollView,
 } from "react-native";
-import { getHumByID } from "../HttpRequests/getHum";
+import { getHum } from "../HttpRequests/getHum";
 
 class HumScreen extends React.Component {
 
@@ -25,10 +25,12 @@ class HumScreen extends React.Component {
   }
 
   componentDidMount() {
-    getHumByID(60).then((data) => {
-      //console.log(data)
+    getHum().then((data) => {
+      let tab = [];
+      tab = data;
+      let lastMeasurement = tab[tab.length - 1];
       this.setState({
-        humidity: data["airHumidity"],
+        humidity: lastMeasurement["airHumidity"],
         isLoading: false
       })
     });
