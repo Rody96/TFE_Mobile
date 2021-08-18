@@ -1,13 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faUser, faArrowLeft, faKey, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faKey, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import TextInput from 'react-native-input-validator';
-import LinearGradient from 'react-native-linear-gradient'
 import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import Loading from '../common';
 const image =  require('../Images/nature1.jpg');
+
 class SignUp extends React.Component {
 
   constructor(props) {
@@ -76,15 +74,13 @@ class SignUp extends React.Component {
   render() {
 
     const { email, password, firstName, lastName, error, loading } = this.state;
-    const { form, section, errorTextStyle } = styles;
+    const { errorTextStyle } = styles;
 
     return (
       <ImageBackground
         source={image}
         style={{width: '100%', height: '100%'}}
       >
-      
-        
 
         <View style={styles.main_container}>
 
@@ -144,13 +140,11 @@ class SignUp extends React.Component {
           </Text>
 
           <View>
-            <TouchableOpacity style={styles.step_button} onPress={() => {
+            <TouchableOpacity style={styles.signUpBtn} onPress={() => {
                 { this.registerUser(this.state.email) }
-                //{ this.emailTextInput.clear() };
-                //{ this.passwordtextInput.clear() }
             }}
             >
-              <Text style={styles.stepText}>S'inscrire</Text>
+              <Text style={styles.btnSignupText}>S'inscrire</Text>
             </TouchableOpacity>
           </View>
 
@@ -167,16 +161,8 @@ class SignUp extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  linearGradient: {
-    height: '100%'
-  },
-  stepBack_container: {
-    marginLeft: 25,
-    marginTop: 25
-  },
   main_container: {
-    alignItems: 'center',
-    //backgroundColor: 'blue'
+    alignItems: 'center'
   },
   title_Screen: {
     marginTop: 80,
@@ -184,41 +170,6 @@ const styles = StyleSheet.create({
     color: 'black',
     marginBottom: 25,
     fontFamily: 'serif'
-  },
-  step: {
-    flexDirection: 'row',
-    marginTop: 25
-  },
-  circleDone: {
-    width: 30,
-    height: 30,
-    backgroundColor: '#599743',
-    borderRadius: 30,
-    elevation: 5,
-    position: 'relative',
-    marginLeft: 8,
-    marginRight: 8
-  },
-  line: {
-    width: 13,
-    height: 4,
-    backgroundColor: '#577B43',
-    borderRadius: 30,
-    marginTop: 12,
-    elevation: 5,
-    position: 'relative',
-    marginLeft: 8,
-    marginRight: 8
-  },
-  circleToDo: {
-    width: 30,
-    height: 30,
-    backgroundColor: '#577B43',
-    borderRadius: 30,
-    elevation: 5,
-    position: 'relative',
-    marginLeft: 8,
-    marginRight: 8
   },
   inputView: {
     height: 37,
@@ -235,29 +186,16 @@ const styles = StyleSheet.create({
     elevation: 5,
     position: 'relative'
   },
-  inputNotVisible: {
-    height: 0,
-    width: 0
-  },
   inputText: {
     padding: 10,
     marginBottom: 20,
     borderWidth: 0,
   },
-  iconTextInput: {
-    padding: 10,
-  },
   redirect_signIn_text: {
     color: '#ffffff',
     fontWeight: 'bold'
   },
-  checkbox: {
-    alignSelf: "center",
-  },
-  checkBoxText: {
-    textAlign: 'right'
-  },
-  step_button: {
+  signUpBtn: {
     width: 170,
     backgroundColor: '#0d1917',
     borderRadius: 15,
@@ -268,7 +206,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
-  stepText: {
+  btnSignupText: {
     color: '#f1f1f1',
     fontSize: 20,
   },
@@ -283,11 +221,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 18,
     color: 'red'
-  },
-  spinnerContainer: {
-    flex: -1,
-    marginTop: 12,
-    marginBottom: 12
   }
 })
 

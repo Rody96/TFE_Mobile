@@ -1,10 +1,8 @@
 import React from "react";
-import {
-  StyleSheet, Text, View, Image, TouchableOpacity, ActivityIndicator, ImageBackground,
-} from "react-native";
+import { Text, View, ActivityIndicator, ImageBackground} from "react-native";
 import { getHum } from "../HttpRequests/getHum";
-import LinearGradient from 'react-native-linear-gradient';
 const image =  require('../Images/nature.jpg');
+
 class HumScreen extends React.Component {
 
   constructor(props) {
@@ -13,16 +11,6 @@ class HumScreen extends React.Component {
       hum: 0,
       isLoading: true
     };
-  }
-
-  _displayLoading() {
-    if (this.state.isLoading) {
-      return (
-        <View style={styles.loading_container}>
-          <ActivityIndicator size="large" />
-        </View>
-      );
-    }
   }
 
   componentDidMount() {
@@ -62,7 +50,6 @@ class HumScreen extends React.Component {
 }
 
 export default HumScreen;
-
 
 const styles = {
   container: {

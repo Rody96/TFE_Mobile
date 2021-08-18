@@ -1,16 +1,10 @@
   
 import React from "react";
 import {View, ImageBackground} from "react-native";
-//import store from "../redux/store";
-import deviceStorage from "../services/deviceStorage";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
-import { Loading } from "../common";
-import {HomeScreen} from "../Components/HomeScreen"
 import { connect } from "react-redux";
 import store from "../redux/store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-const image =  require('../Images/nature1.jpg');
+
 class LoginControl extends React.Component {
     constructor(props) {
         super(props);

@@ -1,10 +1,8 @@
 import React from "react";
-import {
-  StyleSheet, Text, View, Image, TouchableOpacity, ActivityIndicator, ImageBackground,
-} from "react-native";
+import {Text, View, ActivityIndicator, ImageBackground} from "react-native";
 import { getTemp } from "../HttpRequests/getTemperature";
-import LinearGradient from 'react-native-linear-gradient';
 const image =  require('../Images/temp2.jpg');
+
 class TempScreen extends React.Component {
 
 
@@ -56,11 +54,7 @@ class TempScreen extends React.Component {
 
 export default TempScreen;
 
-
 const styles = {
-  linearGradient: {
-    height: '100%'
-  },
   container: {
     flex: 1,
     flexDirection: "column",

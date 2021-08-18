@@ -1,9 +1,6 @@
 import React from "react";
-import {
-  StyleSheet, Text, View, Image, TouchableOpacity, ActivityIndicator, ImageBackground,
-} from "react-native";
+import { Text, View, ActivityIndicator, ImageBackground} from "react-native";
 import { getPPM } from "../HttpRequests/getPPM";
-import LinearGradient from 'react-native-linear-gradient';
 const image =  require('../Images/air3.jpg');
 
 class AirQualityScreen extends React.Component {

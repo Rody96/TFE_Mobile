@@ -1,15 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, TextInput, TouchableOpacity,Image, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity,Image, ImageBackground } from 'react-native';
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
 import { connect } from "react-redux";
-import store from "../redux/store";
-import LinearGradient from 'react-native-linear-gradient'
 import axios from 'axios';
-import { Loading } from '../common';
-import deviceStorage from '../services/deviceStorage';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 const image =  require('../Images/nature1.jpg');
+
 class SignIn extends React.Component {
 
     constructor(props) {
@@ -83,7 +80,7 @@ class SignIn extends React.Component {
     render() {
 
         const { email, password, error, loading } = this.state;
-        const { form, section, errorTextStyle } = styles;
+        const { errorTextStyle } = styles;
 
         return (
             <ImageBackground
@@ -158,9 +155,6 @@ class SignIn extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    linearGradient: {
-        height: '100%'
-    },
     main_container: {
         alignItems: 'center'
     },
@@ -194,12 +188,6 @@ const styles = StyleSheet.create({
         color: '#ffffff',
         fontWeight: 'bold',
     },
-    checkbox: {
-        alignSelf: "center",
-    },
-    checkBoxText: {
-        textAlign: 'right'
-    },
     loginBtn: {
         width: 270,
         backgroundColor: '#0d1917',
@@ -218,10 +206,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 15
     },
-    stepBack_container: {
-        marginLeft: 25,
-        marginTop: 25
-    },
     appIcon:{
       marginTop:50
     },
@@ -229,12 +213,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         fontSize: 18,
         color: 'red'
-    },
-    spinnerContainer: {
-        flex: -1,
-        marginTop: 12,
-        marginBottom: 12
-      }
+    }
 })
 
 const mapStateToProps = (state) => {
