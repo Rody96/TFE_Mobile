@@ -10,7 +10,6 @@ import deviceStorage from './services/deviceStorage.js';
 import HomeScreen from './Components/HomeScreen';
 import { Provider } from 'react-redux'
 import Store from './redux/store'
-
 export default class App extends Component {
 
   componentDidMount() {
