@@ -220,7 +220,8 @@ const styles = StyleSheet.create({
   errorTextStyle: {
     alignSelf: 'center',
     fontSize: 18,
-    color: 'red'
+    color: 'red',
+    fontWeight: 'bold'
   }
 })
 
