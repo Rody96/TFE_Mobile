@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faUser, faArrowLeft, faKey, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import TextInput from 'react-native-input-validator';
@@ -7,6 +7,7 @@ import LinearGradient from 'react-native-linear-gradient'
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Loading from '../common';
+const image =  require('../Images/nature1.jpg');
 class SignUp extends React.Component {
 
   constructor(props) {
@@ -78,9 +79,9 @@ class SignUp extends React.Component {
     const { form, section, errorTextStyle } = styles;
 
     return (
-      <LinearGradient
-      colors={['#67B26F', '#4ca2cd']}
-        style={styles.linearGradient}
+      <ImageBackground
+        source={image}
+        style={{width: '100%', height: '100%'}}
       >
       
         
@@ -160,7 +161,7 @@ class SignUp extends React.Component {
             </TouchableOpacity>
           </View>
         </View>
-      </LinearGradient>
+      </ImageBackground>
     )
   }
 }
@@ -180,8 +181,9 @@ const styles = StyleSheet.create({
   title_Screen: {
     marginTop: 80,
     fontSize: 35,
-    color: 'white',
-    marginBottom: 25
+    color: 'black',
+    marginBottom: 25,
+    fontFamily: 'serif'
   },
   step: {
     flexDirection: 'row',
@@ -246,7 +248,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   redirect_signIn_text: {
-    color: '#26c2e3',
+    color: '#ffffff',
     fontWeight: 'bold'
   },
   checkbox: {
@@ -257,7 +259,7 @@ const styles = StyleSheet.create({
   },
   step_button: {
     width: 170,
-    backgroundColor: '#26c2e3',
+    backgroundColor: '#0d1917',
     borderRadius: 15,
     height: 50,
     marginTop: 40,

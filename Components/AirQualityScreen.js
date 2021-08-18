@@ -1,9 +1,10 @@
 import React from "react";
 import {
-  StyleSheet, Text, View, Image, TouchableOpacity, ActivityIndicator, ScrollView,
+  StyleSheet, Text, View, Image, TouchableOpacity, ActivityIndicator, ImageBackground,
 } from "react-native";
 import { getPPM } from "../HttpRequests/getPPM";
 import LinearGradient from 'react-native-linear-gradient';
+const image =  require('../Images/air3.jpg');
 
 class AirQualityScreen extends React.Component {
 
@@ -33,14 +34,14 @@ class AirQualityScreen extends React.Component {
   render() {
 
     return (
-      <LinearGradient
-                colors={['#67B26F', '#4ca2cd']}
-                style={styles.linearGradient}
-            >
+      <ImageBackground
+      source={image}
+      style={{width: '100%', height: '100%'}}
+      > 
       <View style={styles.container}>
         {this.state.isLoading ? (
           <View style={styles.loading_container}>
-            <ActivityIndicator size="large" color="#0000ff" />
+            <ActivityIndicator size="large" color="#ffffff" />
               </View>
         ) : 
         (
@@ -49,7 +50,7 @@ class AirQualityScreen extends React.Component {
         </View>
         )}
       </View>
-      </LinearGradient>
+    </ImageBackground>  
     );
   }
 }
@@ -58,9 +59,6 @@ export default AirQualityScreen;
 
 
 const styles = {
-  linearGradient: {
-    height: '100%'
-  },
   container: {
     flex: 1,
     flexDirection: "column",
@@ -69,7 +67,7 @@ const styles = {
   },
   title: {
     flex: 2,
-    color: "#34ebc3",
+    color: "#ffffff",
     textAlign: "center",
     textAlignVertical: "center",
     fontSize: 50,

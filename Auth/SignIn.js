@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, TextInput, TouchableOpacity,Image, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TextInput, TouchableOpacity,Image, ImageBackground } from 'react-native';
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
 import { connect } from "react-redux";
@@ -9,6 +9,7 @@ import axios from 'axios';
 import { Loading } from '../common';
 import deviceStorage from '../services/deviceStorage';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+const image =  require('../Images/nature1.jpg');
 class SignIn extends React.Component {
 
     constructor(props) {
@@ -85,9 +86,9 @@ class SignIn extends React.Component {
         const { form, section, errorTextStyle } = styles;
 
         return (
-            <LinearGradient
-                colors={['#67B26F', '#4ca2cd']}//#999966 373b44 5a3f37
-                style={styles.linearGradient}
+            <ImageBackground
+                source={image}
+                style={{width: '100%', height: '100%'}}
             >
 
 
@@ -149,7 +150,7 @@ class SignIn extends React.Component {
                     </View>
 
                 </View>
-            </LinearGradient>
+            </ImageBackground>
 
 
         )
@@ -166,7 +167,7 @@ const styles = StyleSheet.create({
     title_Screen: {
         marginTop: 30,
         fontSize: 35,
-        color: 'white',
+        color: 'black',
         marginBottom: 25,
         fontFamily: 'serif'
     },
@@ -190,7 +191,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     redirect_signin_text: {
-        color: '#26c2e3',
+        color: '#ffffff',
         fontWeight: 'bold',
     },
     checkbox: {
@@ -201,7 +202,7 @@ const styles = StyleSheet.create({
     },
     loginBtn: {
         width: 270,
-        backgroundColor: '#26c2e3',
+        backgroundColor: '#0d1917',
         borderRadius: 25,
         height: 50,
         alignItems: "center",

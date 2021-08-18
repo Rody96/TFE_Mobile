@@ -6,7 +6,7 @@ import SignUp from "../Auth/SignUp";
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from "../Components/HomeScreen";
 import LoginControl from "../Auth/LoginControl";
-
+import MeasurementsNavigation from "../Nav/MeasNavigation";
 const Stack1 = createStackNavigator();
 
 function MyApp() {
@@ -15,7 +15,7 @@ function MyApp() {
       <Stack1.Navigator>
         <Stack1.Screen name="LoginControl" component={LoginControl} options={{ headerShown: false }}/>
         <Stack1.Screen name="Login" component={SignIn} options={{ headerShown: false }}/>
-        <Stack1.Screen name="Home" component={Tabs} options={{ headerShown: false }} />
+        <Stack1.Screen name="Home" component={MeasurementsNavigation} options={{ headerShown: false }} />
         <Stack1.Screen name="SignUp" component={SignUp} options={{ headerShown: false }}/>
       </Stack1.Navigator>
     </NavigationContainer>

@@ -14,7 +14,7 @@ export default class App extends Component {
 
   componentDidMount() {
     StatusBar.setBarStyle( 'light-content',true)
-    StatusBar.setBackgroundColor("#67B26F")
+    StatusBar.setBackgroundColor("#0d1917")
   }
 
   render() {
