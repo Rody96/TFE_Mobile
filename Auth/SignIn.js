@@ -101,7 +101,7 @@ class SignIn extends React.Component {
                     <View style={styles.inputView}>
                     <View style={styles.icon_inputText}><FontAwesomeIcon icon={faUser} /></View>
                         <TextInput
-                            placeholder="Email"
+                            placeholder="Adresse email"
                             label="Email"
                             value={email}
                             onChangeText={email => this.setState({ email })}
@@ -114,7 +114,7 @@ class SignIn extends React.Component {
                     <View><FontAwesomeIcon icon={faKey} /></View>
                         <TextInput
                             secureTextEntry={true}
-                            placeholder="Password"
+                            placeholder="Mot de passe"
                             label="Password"
                             style={styles.inputText}
                             value={password}
