@@ -15,11 +15,9 @@ class AirQualityScreen extends React.Component {
 
   componentDidMount() {
     getPPM().then((data) => {
-      //console.log(data)
       let tab = [];
       tab = data;
       let lastMeasurement = tab[tab.length - 1];
-      //console.log(lastMeasurement)
       this.setState({
         ppm: lastMeasurement["ppm"],
         isLoading: false

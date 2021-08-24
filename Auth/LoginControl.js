@@ -27,10 +27,12 @@ class LoginControl extends React.Component {
       }
     }
 
+    /**
+     * Récupération du token dans l'Asyncstorage
+     */
     loadJWT = async () => {
       try {
         const value = await AsyncStorage.getItem('id_token');
-        console.log("LOADINGJWT", value)
         if (value !== null) {
           console.log(value)
           store.dispatch({type: "SET_TOKEN", value: value})

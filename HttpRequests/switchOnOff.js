@@ -1,4 +1,10 @@
-
+/**
+ * 
+ * Fonction permettant de changer l'état du ventilateur pour un utilisateur donné
+ * 
+ * @param {*} fanState état du ventilateur 
+ * @param {*} id id de l'utilisateur en base de données
+ */
 export function postOnOfftoApi (fanState,id) {
     const url = "https://rodrigue-projects.site/fan/updateFanState?fanState="+ fanState +"&id=" + id ;
     fetch(url, {

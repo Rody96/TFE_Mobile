@@ -22,16 +22,27 @@ class SignIn extends React.Component {
         this.onLoginFail = this.onLoginFail.bind(this);
     }
       
+    /**
+     * Fonction permettant de stocker le token dans l'Asyncstorage ainsi que dans le store Redux
+     */
     saveKey = async (key, valueToSave) => {
         try {
           await AsyncStorage.setItem(key, valueToSave);
           this.props.dispatch({type: "SET_TOKEN", value: valueToSave})
-          console.log("SAVEKEY", key + " " +  valueToSave)
+          console.log("LOGIN, TOKEN:", key + " " +  valueToSave)
         } catch (error) {
           console.log('AsyncStorage Error: ' + error.message);
         }
     }
 
+    /**
+     * 
+     * Fonction de login. On vérifie ici la validité des champs, pour l'adresse mail on utilise une regex. Avec Axios on vérifie via requête HTTP si le mail et mot de passe correspondent.
+     * Si c'est le cas un token est créé et sauvegardé dans l'Asynstorage. L'utilisateur sera redirigé vers l'écran d'accueil.
+     * 
+     * @param {*} text l'adresse mail
+     * 
+     */
     loginUser(text) {
         const { email, password} = this.state;
     

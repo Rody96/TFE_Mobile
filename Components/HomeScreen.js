@@ -25,7 +25,6 @@ class HomeScreen extends React.Component {
   }
 
   componentDidMount() {
-    console.log('HOMESCREEN', store.getState().accessToken)
   }
 
   loadJWT = async () => {
@@ -39,11 +38,12 @@ class HomeScreen extends React.Component {
     }
   }
 
+  /**
+   * Fonction vidant l'Asyncstorage et supprimant le token.
+   */
   deleteJWT = async () => {
     try{
-      console.log("DELETE")
       await AsyncStorage.clear()
-      console.log("LoggedOut")
     } catch (error) {
       console.log('AsyncStorage Error: ' + error.message);
     }

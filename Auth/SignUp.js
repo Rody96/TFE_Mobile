@@ -23,6 +23,14 @@ class SignUp extends React.Component {
   }
 
 
+  /**
+     * 
+     * Fonction d'inscription. On vérifie ici la validité des champs, pour l'adresse mail on utilise une regex. Avec Axios on vérifie via requête HTTP si le mail n'existe pas déjà en DB.
+     * Si ce n'est pas le cas, l'utilisateur est alors créé et sera redirigé vers l'écran de login.
+     * 
+     * @param {*} text l'adresse mail
+     * 
+     */
   registerUser(text) {
     const { email, password, firstName, lastName } = this.state;
 
